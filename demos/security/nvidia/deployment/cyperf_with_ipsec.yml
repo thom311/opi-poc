@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+    client:
+        image: public.ecr.aws/keysight/cyperf-agent:latest
+        container_name: ClientAgent
+        #network_mode: "host"
+        restart: always
+        privileged: true
+        cpuset: ${CPU_CORES_IFC1:-"0"}
+        #command: sh -c "ip link set enp129s0f0np0 netns {} name enp129s0f0np0 && cyperfagent interface test set enp129s0f0np0"
+        environment:
+            - AGENT_TAGS="Dockers-Group=CyPerf-Agent-Client,node-owner=KB"
+            - AGENT_MANAGEMENT_INTERFACE=br1
+            - AGENT_TEST_INTERFACE=enp129s0f0np0
+        cap_add:
+            - NET_ADMIN
+            - IPC_LOCK
+            - NET_RAW
+        networks:
+            cyperf-mgmt-net:
+                ipv4_address: 192.168.0.10            
+    server:
+        image: public.ecr.aws/keysight/cyperf-agent:latest
+        container_name: ServerAgent
+        #network_mode: "host"
+        restart: always
+        privileged: true
+        cpuset: ${CPU_CORES_IFC2:-"1"}
+        #command: sh -c "ip link set enp129s0f1np1 netns {} name enp129s0f1np1 && cyperfagent interface test set enp129s0f1np1"
+        environment:
+            - AGENT_TAGS="Dockers-Group=CyPerf-Agent-Server,node-owner=KB"
+            - AGENT_MANAGEMENT_INTERFACE=br1
+            - AGENT_TEST_INTERFACE=enp129s0f1np1
+        cap_add:
+            - NET_ADMIN
+            - IPC_LOCK
+            - NET_RAW
+
+        networks:
+            cyperf-mgmt-net:
+                ipv4_address: 192.168.0.11           
+
+networks:
+    cyperf-mgmt-net:
+        name: mgmt-net
+        ipam:
+            config:
+                - subnet: "192.168.0.0/24"

@@ -21,9 +21,9 @@ jobs:
     steps:
         - uses: actions/checkout@v1
         - name: Install python requirements 
-          run: pip install -r ./demos/tgen/requirements.txt
-        - name: Run ipsec test automation
-          run: pytest -s ./demos/security/nvidia/ipsec-config.py
+          run: pip install -r ./demos/security/nvidia/requirements.txt
+        - name: Run CyPerf ipsec test automation
+          run: pytest -s ./demos/security/nvidia/test_ipsec.py
 
   opi-ansible:
     runs-on: self-hosted

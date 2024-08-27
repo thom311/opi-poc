@@ -3,7 +3,7 @@
 ## hardware
 
 - server with Ubuntu 22.04
-- Nvidia BlueField2
+- Nvidia BlueField2 or BlueField3
 - Keysight CloudStorm 100G
 
 ## configuration
@@ -11,8 +11,8 @@
 ### host (the server holding the DPU)
 
 - install Ubuntu 22.04 server
-- install `MLNX_OFED_LINUX-5.8-1.1.2.1-ubuntu22.04-x86_64.iso`
-- install `DOCA_1.5.1_BSP_3.9.3_Ubuntu_20.04-4.2211-LTS.signed.bfb` on the BlueField2
+- install `MLNX_OFED_LINUX-24.04-0.6.6.0-ubuntu22.04-x86_64.iso`
+- install `bf-bundle-2.7.0-33_24.04_ubuntu-22.04_prod.bfb` on the BlueField2
 - set BlueField2 in SEPARATED_HOST mode to make things easier
 
 ```Shell
@@ -78,18 +78,8 @@ see <https://github.com/opiproject/pydpu> and <https://github.com/opiproject/god
 
 ```Shell
 # add python api lib to path
-git clone https://github.com/opiproject/opi-api.git
-export PYTHONPATH=${PYTHONPATH}:${HOME}/opi-api/security/v1/gen/python/
-
-pip3 install grpcio
-
-python3
-
-# run the ipsec-config.py from this folder
+git clone https://github.com/opiproject/opi-poc.git
+cd ./opi-poc/
+pip3 install -r demos/security/nvidia/requirements.txt
+pytest -s -v demos/security/nvidia/test_ipsec.py
 ```
-
-### ixload
-
-- load `opi-ipsec-demo-1.rxf`
-- assign the ports
-- click start button

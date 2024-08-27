@@ -1,3 +1,0 @@
-google
-google-api-core
-grpcio
