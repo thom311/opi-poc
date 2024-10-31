@@ -14,7 +14,8 @@ jobs:
         - name: pytest-run3
           run: pip install -r ./demos/tgen/requirements.txt
         - name: pytest-run4
-          run: pytest -s ./demos/tgen/test_tgen_demo.py
+          run: pytest -s ./tgen/test_tgen_demo.py
+          working-directory: ./demos
 
   opi-ipsec:
     runs-on: self-hosted
