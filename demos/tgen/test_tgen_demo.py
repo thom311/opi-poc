@@ -1,3 +1,4 @@
+import os
 import grpc
 import netmiko
 import pydpu
@@ -7,8 +8,9 @@ import requests
 
 from testbed import *
 
-HOME_FOLDER = r'/home/opi/actions-runner/_work/opi-poc/opi-poc'
+#HOME_FOLDER = r'/home/opi/actions-runner/_work/opi-poc/opi-poc'
 #HOME_FOLDER = r'/home/opi/opi-poc'
+HOME_FOLDER = os.environ['GITHUB_WORKSPACE'] 
 
 
 @pytest.fixture
