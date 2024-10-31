@@ -17,7 +17,7 @@ jobs:
           run: pytest -s ./tgen/test_tgen_demo.py
           working-directory: ./demos
           env:
-            PYTHONPATH: ${PYTHONPATH}:./demos
+            PYTHONPATH: ${PYTHONPATH}:${{ github.workspace }}/demos
 
   opi-ipsec:
     runs-on: self-hosted
