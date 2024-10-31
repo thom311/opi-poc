@@ -39,4 +39,4 @@ jobs:
                   -e dpu_bmc_username='root' \
                   -e dpu_bmc_password='NvidiaBf2#Pass' \
                   -e bmc_fw_update_inventory_name='6d53cf4d_bmc_firmware' \
-                  -e bmc_fw_update_image_file='/tmp/bf2-bmc-ota-24.04-5-opn.tar''
+                  -e bmc_fw_update_image_file='/tmp/bf2-bmc-ota-24.04-5-opn.tar'
